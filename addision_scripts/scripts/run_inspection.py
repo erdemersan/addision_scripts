@@ -22,7 +22,7 @@ from geometry_msgs.msg import PoseStamped # Pose with ref frame and timestamp
 from rclpy.duration import Duration # Handles time for ROS 2
 import rclpy # Python client library for ROS 2
 
-from robot_navigator import BasicNavigator, NavigationResult # Helper module
+from addision_scripts.scripts.robot_navigator import BasicNavigator, NavigationResult # Helper module
 
 # Euler angle to quaternion conversion
 from addision_scripts.euler_to_quaternion import get_quaternion_from_euler 
@@ -43,26 +43,27 @@ def main():
   # from either a map or drive and repeat. 
   # The values are [x in meters, y in meters, yaw in radians].
   inspection_route = [
-    [4.0, 0.0, 0],
-    [7.0, -2.5, -0.785],
-    [0.0, -4.0, 3.1415],
-    [-2.5, -1.5, 3.1415],
-    [-5.0, -4.0, 4.71],
-    [-2.5, -1.5, 1.5708],
-    [-8.0, -0.25, 0]]
+    [2.4, -1.0, 0],
+    [2.6, -0.1, -0.785],
+    [2.2, 0.97, 3.1415],
+    [3.42, 3.48, 3.1415],
+    [3.73, 4.25, 3.14],
+    [0.45, -1.08, 3.14],
+    #[-8.0, -0.25, 0]
+    ]
 
   # Set the robot's initial pose 
   initial_pose = PoseStamped()
   initial_pose.header.frame_id = 'map'
   initial_pose.header.stamp = navigator.get_clock().now().to_msg()
-  initial_pose.pose.position.x = 0.0
-  initial_pose.pose.position.y = 0.0
-  initial_pose.pose.position.z = 0.0
+  initial_pose.pose.position.x = 0.05
+  initial_pose.pose.position.y = 0.02
+  initial_pose.pose.position.z = 0.097
   initial_pose.pose.orientation.x = 0.0
   initial_pose.pose.orientation.y = 0.0
-  initial_pose.pose.orientation.z = 0.0
-  initial_pose.pose.orientation.w = 1.0
-  navigator.setInitialPose(initial_pose)
+  initial_pose.pose.orientation.z = -0.2
+  initial_pose.pose.orientation.w = 0.97
+  #navigator.setInitialPose(initial_pose)
 
   # Wait for navigation to fully activate. Use this line if autostart is set to true.
   navigator.waitUntilNav2Active()

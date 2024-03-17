@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'run_inspection = addision_scripts.run_inspection:main'
+            'run_inspection = addision_scripts.scripts.run_inspection:main',
+            'robot_navigator = addision_scripts.scripts.robot_navigator:main',
         ],
     },
 )
